@@ -1,0 +1,999 @@
+sqa_4e5798342f46f8e90e618b41445e45e965820a35
+region: us-central1-a
+us-east1-b
+us-east1-b
+export CLUSTER_NAME=demo
+export CLUSTER_ZONE=us-east1-b
+#gcloud auth login
+n1-standard-1 $0.03325 hourly
+n1-standard-2
+n1-standard-4
+n1-standard-8
+
+setx myvariable myvariablevalue
+
+export CLUSTER_ZONE=us-east1-b
+export CLUSTER_NAME=prod-us-demo
+#gcloud container clusters create --machine-type n1-standard-8 prod-gke-demo --zone $CLUSTER_ZONE --num-nodes 4 --min-nodes 4 --max-nodes 5
+
+#worked 11-11-2024
+gcloud container clusters create --machine-type n1-standard-4 --num-nodes 2 --zone us-east1-b --cluster-version latest prod-us-demo
+
+export CLUSTER_ZONE=us-east1-b
+export CLUSTER_NAME=prod-us-demo
+gcloud container clusters get-credentials $CLUSTER_NAME --zone $CLUSTER_ZONE --project eagunu2025-441216
+
+gcloud container clusters delete $CLUSTER_NAME --zone $CLUSTER_ZONE
+gcloud container clusters delete prod-gke-demo  --zone us-east1-b
+
+https://cloud.google.com/sdk/docs/install#linux  #gcloud CLI
+https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#gcloud_1
+#gcloud container clusters create --machine-type n1-standard-4 --num-nodes 4 --zone $CLUSTER_ZONE --additional-zones us-central1-b,us-central1-c --cluster-version latest mydemo
+
+
+gcloud container clusters create --machine-type n1-standard-8 --num-nodes 2 --zone us-central1-a  --cluster-version latest demo-cluster
+
+#firewale rules
+https://cloud.google.com/sdk/gcloud/reference/compute/firewall-rules/create
+
+gcloud container clusters create example-cluster \
+    --zone us-central1-a \
+    --additional-zones us-central1-b,us-central1-c
+#This failed
+gcloud container clusters create \
+  --machine-type n1-standard-2 \
+  --num-nodes 2 \
+  --zone us-central1-a \
+  --additional-zones us-central1-b,us-central1-c \
+  --cluster-version latest \
+  demo-cluster
+
+kubectl create clusterrolebinding cluster-admin-binding \
+  --clusterrole=cluster-admin \
+  --user=<GOOGLE-EMAIL-ACCOUNT>
+#This worked last updated
+gcloud container clusters create --machine-type n1-standard-2 --num-nodes 2 --node-locations  us-central1-a --additional-zones us-central1-b,us-central1-c --cluster-version latest mydemo
+#Update the kubectl configuration to use the plugin:
+https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#install_plugin
+gcloud container clusters get-credentials demo-cluster --region us-central1-a
+gcloud container clusters delete demo-cluster --zone us-central1-a
+# gcloud container clusters create $CLUSTER_NAME --image-type COS --num-nodes 1 --machine-type n1-standard-1 --zone $CLUSTER_ZONE
+# gcloud container clusters create cka --image-type COS --num-nodes 2 --machine-type n1-standard-1 --zone us-east1-b
+# working by the end of december 2022
+
+
+       Sonarqube installation
+https://www.sonarqube.org/downloads/
+https://docs.sonarqube.org/8.9/requirements/requirements/
+yum install java-17-openjdk-devel -y
+#https://www.coachdevops.com/2020/04/how-to-integrate-sonarqube-with-jenkins.html
+
+https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.2.77730.zip
+##########Mithun committed ######
+cd /opt
+yum install wget unzip -y
+#wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.8.zip
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.8.54436.zip
+     https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.10.61524.zip
+     https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.5.90363.zip
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.7.96285.zip
+
+unzip sonarqube-7.8.zip
+#########################
+#pwd eagunu
+cd /opt
+yum install wget unzip -y
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.7.52159.zip
+
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.8.54436.zip
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.5.0.56709.zip
+
+unzip sonarqube-8.9.7.52159.zip
+mv
+#As a good security practice, SonarQuber Server is not advised to run sonar service as a root user, so create a new user called nexus and grant sudo access to manage nexus services as follows.
+useradd sonar-2025
+Give the sudo access to sonar user
+visudo
+sonar-2025   ALL=(ALL)     NOPASSWD: ALL
+cd
+##########
+Change the owner and group permissions to /opt/sonarqube-7.8/ directory.
+chown -R sonar-2025:sonar-2025 /opt/sonar-2025/
+chmod -R 775 /opt/sonar-2025/
+su - sonar-2025
+cd /opt/sonar-2025/bin/linux-x86-64/
+./sonar.sh start
+sh sonar.sh start
+sh sonar.sh status
+sh sonar.sh stop
+################################
+yum install java-11-openjdk-devel
+java -version
+cd /opt
+yum install wget unzip -y
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.8.54436.zip
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.5.0.56709.zip
+unzip sonarqube-8.9.8.54436.zip
+
+mv sonarqube-8.9.8.54436 sonarqube
+useradd sonar
+visudo
+sonardemo   ALL=(ALL)       NOPASSWD: ALL
+chown -R sonardemo :sonardemo  sonardemo
+chmod -R 775 sonarqube
+su - eagunuworld
+# Change the owner and group permissions to /opt/sonarqube/ directory.
+# chown -R sonar:sonar /opt/sonarqube/
+# chmod -R 775 /opt/sonarqube/
+# su - sonar
+# cd /opt/sonarqube/bin/linux-x86-64/
+#
+# ./sonar.sh start
+#########aftert switching to sonar user
+cd /opt/sonarqube
+cd bin/
+cd linux-x86-64/
+./sonar.sh status
+./sonar.sh start
+./sonar.sh status
+#Hardware Requirements for SonarQube
+#----------------------------------------------------
+#The SonarQube server requires at least 2GB of RAM to run efficiently and 1GB of free RAM for the OS.
+
+#Login as a root user.
+sudo su -
+
+#Download the SonarqQube Server software.
+cd /opt
+yum install wget unzip -y
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.8.zip
+unzip sonarqube-7.8.zip
+
+
+#As a good security practice, SonarQuber Server is not advised to run sonar service as a root user, so create a new user called nexus and grant sudo access to manage nexus services as follows.
+useradd sonar
+
+Give the sudo access to sonar user
+visudo
+
+sonar   ALL=(ALL)       NOPASSWD: ALL
+
+Change the owner and group permissions to /opt/sonarqube-7.8/ directory.
+chown -R sonar:sonar /opt/sonarqube-7.8/
+chmod -R 775 /opt/sonarqube-7.8/
+su - sonar
+cd /opt/sonarqube-7.8/bin/linux-x86-64/
+
+./sonar.sh start
+
+Troubleshooting
+--------------------
+
+sonar service is not starting?
+
+a)make sure you need to change the ownership and group to /opt/sonarqube-7.6/ directory for sonar user.
+b)make sure you are trying to start sonar service with sonar user.
+c)check java is installed or not using java -version command.
+
+Unable to access SonarQube server URL in browser?
+
+a)make sure port 9000 is opened in security groups - AWS ec2 instance.
+
+Create SonarQube server as a sonar service
+--------------------------------------------------------
+
+ln /opt/sonarqube-7.8/bin/linux-x86-64/sonar.sh /etc/init.d/sonar
+
+vi /etc/init.d/sonar
+
+#add below lines in /etc/init.d/sonar
+
+SONAR_HOME=/opt/sonarqube-7.8
+PLATFORM=linux-x86-64
+
+WRAPPER_CMD="${SONAR_HOME}/bin/${PLATFORM}/wrapper"
+WRAPPER_CONF="${SONAR_HOME}/conf/wrapper.conf"
+PIDDIR="/opt/sonarqube-7.8/"
+
+#Enable the sonar service
+sudo systemctl enable sonar
+
+#Start the sonar service
+sudo systemctl start sonar
+
+#Check the status of the  sonar service
+sudo systemctl status sonar
+
+#New youTube
+#https://www.youtube.com/watch?v=oRac6bji5OY
+#https://www.youtube.com/watch?v=tbr_PeAGdfo
+#https://www.youtube.com/watch?v=ZAfMauwNFuQ
+
+sysctl -w vm.max_map_count=524288
+sysctl -w fs.file-max=131072
+ulimit -n 131072
+ulimit -u 8192
+https://docs.sonarqube.org/latest/requirements/requirements/
+#login
+user: admin
+pwd: admin
+
+version: "3.3"
+services:
+  db:
+    image: postgres:12-alpine
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+      - POSTGRES_DB=sonar
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - sonarqube-net
+
+  sonarqube:
+    image: sonarqube:community
+    depends_on:
+      - db
+    environment:
+      - sonar.jdbc.username=sonar
+      - sonar.jdbc.url=jdbc:postgresql://db/sonar
+      - sonar.jdbc.password=sonar
+    ports:
+      - 9000:9000
+    volumes:
+      - sonar_conf:/opt/sonarqube/conf
+      - sonar_data:/opt/sonarqube/data
+      - sonar_extensions:/opt/sonarqube/extensions
+      - sonar_plugins:/opt/sonarqube/lib/bundled-plugins
+    networks:
+      - sonarqube-net
+networks:
+  sonarqube-net:
+volumes:
+  sonar_conf:
+  sonar_data:
+  sonar_extensions:
+  sonar_plugins:
+  postgres_data:
+
+
+                #Nexus installation
+#############################
+#java 11
+yum update -y
+yum install java-11-openjdk-devel -y
+java --version
+update-alternatives --config java
+#################################
+cd /opt
+yum install tar wget -y
+wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.rpm
+yum install jdk-8u131-linux-x64.rpm -y
+
+java -version
+##############################
+Nexus OSS
+Nexus Pro
+################
+Default: pwd
+userName: admin
+pwd: admin123
+##Login as a root user
+sudo su -
+
+##Change dir to /opt
+#java 8
+cd /opt
+yum install wget tar -y
+sudo wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.rpm
+yum install jdk-8u131-linux-x64.rpm -y
+java -version
+#As a good security practice, Nexus is not advised to run nexus service as a root user,
+# so create a new user called nexus and grant sudo access to manage nexus services as follows.
+#Give the sudo access to nexus user
+Login as a root user
+sudo su -
+cd /opt
+yum install wget tar  -y
+wget https://download.sonatype.com/nexus/3/nexus-3.36.0-01-unix.tar.gz
+
+https://download.sonatype.com/nexus/3/nexus-3.38.1-01-unix.tar.gz
+
+https://download.sonatype.com/nexus/3/nexus-3.75.1-01-unix.tar.gz
+
+# wget https://download.sonatype.com/nexus/3/nexus-3.37.3-02-unix.tar.gz
+# wget https://download.sonatype.com/nexus/3/nexus-3.38.0-01-unix.tar.gz
+# wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+wget https://download.sonatype.com/nexus/3/nexus-3.44.0-01-unix.tar.gz
+tar -zxvf nexus-3.37.3-02-unix.tar.gz
+mv nexus-3.37.3-02 nexus
+#As a good security practice, Nexus is not advised to run nexus service as a root user, so create a new user called nexus and grant sudo access to manage nexus services as follows.
+useradd nexus
+#Give the sudo access to nexus user
+visudo
+nexus   ALL=(ALL)     NOPASSWD: ALL
+nexus ALL=(ALL) NOPASSWD: ALL
+#Change the owner and group permissions to /opt/nexus
+#and /opt/sonatype-work directories.
+chown -R nexus:nexus /opt/nexus-3
+chown -R nexus:nexus /opt/sonatype-work
+chmod -R 775 /opt/nexus-3
+chmod -R 775 /opt/sonatype-work
+#Open /opt/nexus/bin/nexus.rc file and  uncomment run_as_user parameter and set as nexus user.
+vi /opt/nexus-3/bin/nexus.rc
+run_as_user="nexus"
+#Create nexus as a service
+#From bin directories create soft link
+#/opt/nexus/bin
+ln -s /opt/nexus/bin/nexus /etc/init.d/nexus
+#Create a nexus systemd unit file.
+sudo vi /etc/systemd/system/nexus.service
+[Unit]
+Description=nexus service
+After=network.target
+
+[Service]
+Type=forking
+LimitNOFILE=65536
+User=nexus
+Group=nexus
+ExecStart=/opt/nexus-3/bin/nexus start
+ExecStop=/opt/nexus-3/bin/nexus stop
+User=nexus
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+#Switch as a nexus user and start the nexus service as follows.
+echo "run_as_user=\"nexus\"" >> /opt/nexus/nexus-2025/bin/nexus.rc
+sudo su - nexus
+#Enable the nexus services
+sudo systemctl enable nexus
+sudo systemctl start nexus
+sudo systemctl status nexus
+#####################
+https://devopscube.com/how-to-install-latest-sonatype-nexus-3-on-linux/
+https://help.sonatype.com/repomanager3/product-information/download
+###################
+#Access the Nexus server from Laptop/Desktop browser.
+http://IPAddess/Hostname:8081/
+#Default Credentials
+/opt/sonatype-work/nexus3/admin.password
+User Name: admin
+Password: nexus
+Troubleshooting
+---------------------
+nexus service is not starting?
+a)make sure need to change the ownership and group to /opt/nexus and /opt/sonatype-work directories and permissions (775) for nexus user.
+b)make sure you are trying to start nexus service with nexus user.
+c)check java is installed or not using java -version command.
+d) check the nexus.log file which is availabe in  /opt/sonatype-work/nexus3/log  directory.
+Unable to access nexus URL?
+-------------------------------------
+a)make sure port 8081 is opened in security groups in AWS ec2 instance.
+############################
+    1  cd /opt
+    2  yum install tar wget -y
+    3  clear
+    4  wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.rpm
+    5  yum install jdk-8u131-linux-x64.rpm -y
+    6  java -version
+    7  clear
+wget wget https://download.sonatype.com/nexus/3/nexus-3.38.0-01-unix.tar.gz
+    9  ls
+   10  clear
+   11  ls -lart
+   12  tar -zxvf nexus-3.38.0-01-unix.tar.gz
+   13  clear
+   14  ls
+   15  mv nexus-3.38.0-01 nexus
+   16  clear
+   17  ls -lart
+   18  useradd nexus
+   19  visudo
+   nexus ALL=(ALL)  NOPASSWD: ALL
+chown -R nexus:nexus /opt/nexus
+chown -R nexus:nexus /opt/sonatype-work
+chmod -R 775 /opt/nexus
+chmod -R 775 /opt/sonatype-work
+   24  vi /opt/nexus/bin/nexus.rc
+   25  ln -s /opt/nexus-3-38/bin/nexus /etc/init.d/nexus
+   26  sudo su - nexus-3-38
+   27  history
+[nexus@nexus-01 ~]$ history
+    1  sudo systemctl enable nexus
+    2  sudo systemctl start nexus
+    3  sudo systemctl status nexus
+
+
+ #Jenkins nodes
+sudo mkdir prod_show_workingDir
+sudo chmod -R 777 prod_show_workingDir
+cd prod_show_workingDir/
+pwd
+
+ssh-keygen
+cat ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub
+sudo vi ~/.ssh/authorized_keys
+
+
+sudo yum install git -y
+sudo dnf -y install dnf-plugins-core
+sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo systemctl enable --now docker
+sudo chmod 777 /var/run/docker.sock
+docker images
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+
+
+###########################
+#############Ingress
+# What is the Ingress?
+
+The Ingress is a Kubernetes resource that lets you configure an HTTP load balancer for applications running on Kubernetes, represented by one or more [Services](https://kubernetes.io/docs/concepts/services-networking/service/). Such a load balancer is necessary to deliver those applications to clients outside of the Kubernetes cluster.
+
+The Ingress resource supports the following features:
+* **Content-based routing**:
+    * *Host-based routing*. For example, routing requests with the host header `foo.example.com` to one group of services and the host header `bar.example.com` to another group.
+    * *Path-based routing*. For example, routing requests with the URI that starts with `/serviceA` to service A and requests with the URI that starts with `/serviceB` to service B.
+
+See the [Ingress User Guide](http://kubernetes.io/docs/user-guide/ingress/) to learn more about the Ingress resource.
+
+## What is the Ingress Controller?
+
+The Ingress controller is an application that runs in a cluster and configures an HTTP load balancer according to Ingress resources. The load balancer can be a software load balancer running in the cluster or a hardware or cloud load balancer running externally. Different load balancers require different Ingress controller implementations.
+
+In the case of NGINX, the Ingress controller is deployed in a pod along with the load balancer.
+
+
+# Installing the Ingress Controller In AWS
+
+## 1. Clone Kubernetes Nginx Ingress Manifests into server where you have kubectl
+
+```
+$ git clone https://github.com/MithunTechnologiesDevOps/kubernetes-ingress.git
+
+$ cd kubernetes-ingress/deployments
+```
+## 2. Create a Namespace And SA
+
+```
+ $ kubectl apply -f common/ns-and-sa.yaml
+```
+## 3. Create RBAC, Default Secret And Config Map
+
+```
+ $ kubectl apply -f common/
+```
+
+## 4. Deploy the Ingress Controller
+
+We include two options for deploying the Ingress controller:
+ * *Deployment*. Use a Deployment if you plan to dynamically change the number of Ingress controller replicas.
+ * *DaemonSet*. Use a DaemonSet for deploying the Ingress controller on every node or a subset of nodes.
+
+### 4.1 Create a DaemonSet
+
+When you run the Ingress Controller by using a DaemonSet, Kubernetes will create an Ingress controller pod on every node of the cluster.
+
+```
+ $ kubectl apply -f daemon-set/nginx-ingress.yaml
+ ```
+
+## 5. Check that the Ingress Controller is Running
+
+Check that the Ingress Controller is Running
+Run the following command to make sure that the Ingress controller pods are running:
+```
+$ kubectl get pods --namespace=nginx-ingress
+```
+
+## 6. Get Access to the Ingress Controller
+
+ **If you created a daemonset**, ports 80 and 443 of the Ingress controller container are mapped to the same ports of the node where the container is running. To access the Ingress controller, use those ports and an IP address of any node of the cluster where the Ingress controller is running.
+
+
+### 6.1 Service with the Type LoadBalancer
+
+ Create a service with the type **LoadBalancer**. Kubernetes will allocate and configure a cloud load balancer for load balancing the Ingress controller pods.
+
+**For AWS, run:**
+```
+$ kubectl apply -f service/loadbalancer-aws-elb.yaml
+```
+
+To get the DNS name of the ELB, run:
+```
+$ kubectl describe svc nginx-ingress --namespace=nginx-ingress
+```
+
+`OR`
+
+```
+kubectl get svc -n nginx-ingress
+```
+
+You can resolve the DNS name into an IP address using `nslookup`:
+```
+$ nslookup <dns-name>
+```
+
+
+# 7. Ingress Resource:
+
+### 5.1 Define path based or host based routing rules for your services.
+
+### Single DNS Sample with host and servcie place holders
+``` yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: <name>
+  namespace: <namespace>
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: <domainName>
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/<Path>"
+        backend:
+          service:
+            name: <serviceName>
+            port:
+              number: <servicePort>
+```
+
+### Multiple DNS Sample with hosts and servcies place holders
+``` yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: <name>
+  namespace: <namespace>
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: <domainName>
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/<Path>"
+        backend:
+          service:
+            name: <serviceName>
+            port:
+              number: <servicePort>
+  - host: <domainName>
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/<Path>"
+        backend:
+          service:
+            name: <serviceName>
+            port:
+              number: <servicePort>
+```
+
+### Path Based Routing Example
+``` yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: <name>
+  namespace: <nsname>
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: <domain>
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/<Path>"
+        backend:
+          service:
+            name: <serviceName>
+            port:
+             number: <servicePort>
+      - pathType: Prefix
+        path: "/<path>"
+        backend:
+          service:
+            name: <servcieName>
+            port:
+              number: <servicePort>
+```
+
+
+`Make sure you have services created in K8's with type ClusterIP for your applications. Which your are defining in Ingress Resource`.
+
+## Uninstall the Ingress Controller
+
+ Delete the `nginx-ingress` namespace to uninstall the Ingress controller along with all the auxiliary resources that were created:
+ ```
+ $ kubectl delete namespace nginx-ingress
+ ```
+
+ **Note**: If RBAC is enabled on your cluster and you completed step 2, you will need to remove the ClusterRole and ClusterRoleBinding created in that step:
+
+ ```
+ $ kubectl delete clusterrole nginx-ingress
+ $ kubectl delete clusterrolebinding nginx-ingress
+ ```
+
+## Ingress with Https Using Self Signed Certificates:
+
+### Generate self signed certificates
+```
+$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -out mithun-ingress-tls.crt -keyout mithun-ingress-tls.key -subj "/CN=javawebapp.mithuntechdevops.co.in/O=mithun-ingress-tls"
+
+# Create secret for with your certificate .key & .crt file
+
+$ kubectl create secret tls mithun-ingress-tls --namespace default --key mithun-ingress-tls.key --cert mithun-ingress-tls.crt
+```
+### Mention tls/ssl(certificate) details in ingress
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mithuntechappingressrule
+  namespace: test-ns
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - mithuntechdevops.co.in
+    secretName: mithun-ingress-tls
+  rules:
+  - host: mithuntechdevops.co.in
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/java-web-app"
+        backend:
+          service:
+            name: javawebappsvc
+            port:
+              number: 80
+      - pathType: Prefix
+        path: "/maven-web-application"
+        backend:
+          service:
+            name: mavenwebappsvc
+            port:
+              number: 80
+
+
+##############
+```
+##############
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eagunu-ingress
+  namespace: ibm-ucd
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: mongodb.eagunu4live.cloud
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: mss-springboot-svc
+            port:
+              number: 80
+  - host: mongodb.eagunu4live.cloud
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/mss-us-east-2-web-prod"
+        backend:
+          service:
+            name: mss-maven-svc
+            port:
+              number: 80
+  - host: mongodb.eagunu4live.cloud
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/java-web-app"
+        backend:
+          service:
+            name: mss-svc-dock
+            port:
+              number: 80
+
+# HELM INSTALLATION
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get-helm-3 > get_helm.sh
+chmod 700 get_helm.sh
+./get_helm.sh
+#################JENKINS#####################
+https://artifacthub.io/packages/helm/jenkinsci/jenkins
+
+Using Helm
+######### NO CHANGE MADE RUN AS IT IS this was tested in gke cluster and it works###################
+kubectl create ns monitor
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm install ingress-nginx ingress-nginx/ingress-nginx --dry-run
+helm install ingress-nginx ingress-nginx/ingress-nginx -n monitor
+
+
+####################################PROMETHEUS HELM INSTALLATION ############################
+#https://artifacthub.io/packages/helm/prometheus-community/prometheus
+kubectl create namespace monitor
+helm repo add prometheus https://prometheus-community.github.io/helm-charts
+helm search repo
+helm search repo prometheus
+helm show values prometheus/prometheus  -n monitoring
+helm show values prometheus/prometheus > prometheus_may_16_22_values.yml
+helm template prometheus44 stable/prometheus
+helm install prom prometheus/prometheus -n monitor
+helm install prometheus44 stable/prometheus  -n monitoring --dry-run
+helm template prometheus44 stable/prometheus -n monitor --set replicas=4
+helm show value https://prometheus-community.github.io/helm-charts > promeu_values.yml
+helm install prometheus44 stable/prometheus
+helm upgrade prometheus44 stable/prometheus -n monitor --set replicas=4
+helm rollback prometheus44  -n monitor
+helm uninstall prometheus44  -n monitor
+helm upgrade --install prometheus44 stable/prometheus -f promethuesValues.yml -n monitoring
+helm ls -n montor
+kubectl get po,svc,sa,clusterrole,cm -n monitor
+kubectl top nodes
+kubectl top po
+kubectl get secret --namespace monitoring grafana44 -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+helm upgrade prometheus44 stable/prometheus -f promethuesValues.yml -n monitoring
+kubectl get configmap -n monitoring
+kubectl get configmap prometheus-server -n monitoring -o yaml
+helm uninstall prometheus44 -n monitoring
+
+#######setting alert rules in prometheus
+kubectl -n monitor exec -it prom-prometheus-server-5cf68bb6cb-xzs58 cat  /etc/config/alerting_rules.yml
+
+##################HELM METRIC WITH MANIFESTS VALIDATION###############################
+#https://artifacthub.io/packages/helm/bitnami/metrics-server
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo ls
+helm search repo bitman
+helm template bitman/metrics-server #show manifest
+helm install releaseName bitman/metrics-server -n monitoring --dry-run #show manifest
+helm show value bitman/metrics-server #show manifest
+helm install myMetric bitman/metrics-server -n monitoring
+helm list -n monitoring
+kubectl get po,svc -n monitoring
+
+###################HELM GRAFANA INSTALLATION###############################
+#https://grafana.com/docs/agent/latest/operator/helm-getting-started/
+helm repo add grafana https://grafana.github.io/helm-charts
+helm install grafana44 stable/grafana -f grafanaValues.yml -n monitoring
+helm ls -n monitoring
+kubectl get po,svc -n monitoring
+helm uninstall grafana44 -n monitoring
+kubectl get configMaps --all-namespace
+helm rollback  metricServer stable/metric-server -n kube-system
+kubectl get secret --namespace monitor grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+http://prom-prometheus-server
+https://grafana.com/grafana/dashboards/
+
+###### CHECK WITH TO DEPLOY BEFORE DEPLOYMENT######################
+#Deploy Person Application with Helm
+mkdir  helm-workShop-pad
+helm create javaApp
+tree javaApp  #To see javaApp in a tree structure
+helm template javaApp #check what to deploy
+helm template myJavaApp --set autoscaling.enable=true
+helm template myJavaApp --set service.type=LoadBalancer --set image.tag=1
+helm install releaseName myJavaApp --set autoscaling.enable=true  --set image.tag=1
+helm show values myJavaApp
+helm install releaseName myJavaApp --set autoscaling.enable=true  --set image.tag=1 --set autoscaling.enable=true
+helm ls
+Kubectl get all
+helm uninstall releaseName
+helm rollback releaseName
+helm rollback releaseName --revison 2
+
+
+HELM INGRESS
+###########
+helm install nginx-ingress ingress-nginx/ingress-nginx --namespace ingress-basic --set controller.replicaCount=2 --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux --set controller.admissionWebhooks.patch.nodeSelector."beta\.kubernetes\.io/os"=linux
+Kuberetes community
+https://devopscube.com/setup-ingress-kubernetes-nginx-controller/
+https://github.com/kubernetes/ingress-nginx/blob/master/deploy/static/provider/cloud/deploy.yaml
+
+
+2.AZURE
+##########
+az group create --name myAKSRG --location centralus
+az group delete --name myAKSRG
+az group list
+az resource list -g myAKSRG --location centralus
+az vm create --resource-group myResourceGroup --name myVM --image win2016datacenter --admin-username azureuser
+az vm open-port --port 80 --resource-group myResourceGroup --name myVM
+
+
+kubectl --namespace ingress-basic get services -o wide -w nginx-ingress-ingress-nginx-controller
+https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip
+
+az aks create -g myRG -n myAKS --node-count 3 --enable-addons monitoring --generate-ssh-keys
+az aks install-cli
+az aks get-credentials -g myRG -n myAKS
+
+
+az group create -n my -l eastus
+az aks create -g myAKSRG -n myAKS --node-count 1 --enable-addons monitoring --generate-ssh-keys
+az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+az aks delete
+az aks get-credentials -g myAKSRG -n myAKS
+
+ingress4
+https://dzone.com/articles/nginx-ingress-controller-configuration-in-aks
+
+
+
+aws s3 cp s3://kubernetesdecember2020/Adku /Users/agunu2020/Desktop/DevOpsSchool/exam_kubernetes/classwork/aws_record_s3
+aws s3 cp s3://kubernetesdecember2020/AdkubeintroInstallation1.zip /Users/agunu2020/Downloads/kuberShop
+
+
+https://zero-to-jupyterhub.readthedocs.io/en/v0.6/create-k8s-cluster.html
+
+
+       HOW TO INSTALL AZ
+https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=yum
+
+
+https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+#helm template webApp --set image.tag=45 --set service.type=LoadBalancer --set service.port=8080 --set autoscaling.enabled=true
+############################################################
+helm lint webApp/
+helm update releaseName chatName
+
+#move helmchart to github
+helm repo add repoName github
+helm repo ls
+helm search repo repoName
+helm  install releaseName repoName/myJavaApp
+####################################################
+helm search repo community/prometheus
+helm template  community/prometheus
+helm pull community/prometheus
+tar -zxf prometheus
+helm show value community/prometheus > prometheusValue.yml
+
+
+
+#######################################################
+##################################################################################
+   MONITORING TOOLS
+What Is Server Monitoring?
+Server monitoring is a way to look into what your servers are doing in real time.
+It can provide you with actionable data, and is most often used for troubleshooting and capacity planning. It’s typically done at three levels:
+#################################
+helm repo add promed https://prometheus-community.github.io/helm-charts
+helm repo update
+#################################################
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+
+#############################
+
+Network (e.g., traffic, bandwidth, latency).
+Machine (e.g., CPU and memory utilization and storage).
+Application (e.g., rate of user commands, locks, large syncs, commits/submits, etc.).
+
+if server goes down alert should be triggered
+#############################################################
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm search repo | grep "prometheus"
+helm search repo | grep "grafana"
+helm template stable/prometheus >> dummy.yml
+cat dummy.yml
+helm show volumes stable/prometheus
+helm show value agunuHelmRepo/agunuHelmRepo2 >> javawebappvalues.yml
+kubectl create ns monitoring
+kubectl  get all -n monitoring
+
+kubectl get configMaps --all-namespace
+helm rollback  metricServer stable/metric-server -n kube-system
+helm ls -n kube-system
+helm ls -n monitoring
+helm uninstall metricsName -n kube-system
+
+
+helm show value agunuHelmRepo/agunuHelmRepo2 >> javawebappvalues.yml
+helm install javawebapp agunuHelmRepo/agunuHelmRepo2 -f javawebappvalues.yml
+
+helm install prometheus44 stable/prometheus -n monitoring      #default
+
+
+helm template stable/prometheus
+helm template stable/grafana
+
+helm show values stable/prometheus >> promethuesValues.yml
+helm show values stable/grafana >> grafanaValues.yml
+
+helm repo add stable https://charts.helm.sh/stable
+helm install grafana44 stable/grafana -f grafanaValues.yml -n monitoring
+kubectl get configMaps --all-namespace
+helm rollback  metricServer stable/metric-server -n kube-system
+helm ls -n kube-system
+helm ls -n monitoring
+helm uninstall metricsName -n kube-system
+
+helm install prometheus44 stable/prometheus -f promethuesValues.yml -n monitoring
+kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+kubectl get secret -n monitoring grafana44 -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
+helm upgrade prometheus44 stable/prometheus -f promethuesValues.yml -n monitoring
+kubectl get configmap -n monitoring
+kubectl get configmap prometheus-server -n monitoring -o yaml
+
+
+######################GRAPHANA HELLM DEPLOYMENT ##################################
+grafana dashborad
+https://grafana.com/grafana/dashboards?search=kubernetes
+
+
+###Get Grafana default password to login. Default user name is admin.
+kubectl get secret -n monitoring grafana44 -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
+
+(((count(count(node_cpu_seconds_total{instance="$node",job="$job"}) by (cpu))) - avg(sum by (mode)(irate(node_cpu_seconds_total{mode='idle',instance="$node",job="$job"}[5m])))) * 100) / count(count(node_cpu_seconds_total{instance="$node",job="$job"}) by (cpu))
+
+helm upgrade metricServer stable/metric-server -n kube-system --set replicas 2
+
+kubectl get configMaps --all-namespace
+helm rollback  metricServer stable/metric-server -n kube-system
+
+helm ls -n monitoring
+kubectl get all  -n monitoring
+helm uninstall prometheus44 -n monitoring
+
+https://raw.githubusercontent.com/MithunTechnologiesDevOps/Kubernates-Manifests/master/prometheusvalues.yml
+helm install  --set alertmanager.service.type=NodePort  --set server.service.type=NodePort -f rules.yml prometheus stable/prometheus -n monitoring -f prometheusvalues.yml
+
+
+                   prometheus query
+                   ####################
+kube_node_status_capacity_memory_bytes
+kube_node_status_allocatable_memory_bytes
+kube_node_status_allocatable_pods
+node_memory_MemTotal_bytes
+node_memory_MemAvailable_bytes
+node_memory_MemFree_bytes
+node_memory_Inactive_bytes
+
+
+kube_pod_info
+kube_pod_container_info
+kube_pod_container_status_ready
+kube_pod_container_status_running
+kube_pod_container_status_terminated
+kube_pod_container_status_waiting
+
+
+     ALERT HAS TO BE DEFINE AS PART OF PROMETHEUS FILES
+kubectl exec  prometheus_pods -n monitoring -c prometheus-server ls /etc/prometheus
+inject from outside
+updated the configmap
+aler configure with smtp to trigger aler
+the files
+
+https://raw.githubusercontent.com/MithunTechnologiesDevOps/Kubernates-Manifests/master/prometheusvalues.yml
+
+helm install prometheus44 stable/prometheus -n monitoring -f promethuesValues.yml
+helm upgrade prometheus44 stable/prometheus -n monitoring -f  alert_rules.yml
+helm upgrade prometheus44 stable/prometheus -n monitoring -f promethuesValuesLB.yml

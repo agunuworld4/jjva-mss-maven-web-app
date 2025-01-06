@@ -1,0 +1,23 @@
+#https://www.baeldung.com/ops/kubernetes-pods-scaling
+#kubectl scale --replicas=2 deployment/nginx -n scaling-demo                                                                                        apiVersion: apps/v1                                                                                                                                 kind: Deployment                                                                                                                                    metadata:                                                                                                                                             name: nginx                                                                                                                                         namespace: scaling-demo
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: scaling-demo
+spec:
+  replicas: 2            # We've updated this value
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: nginx:alpine-slim
+        name: nginx
+        ports:
+        - containerPort: 80
+          name: nginx

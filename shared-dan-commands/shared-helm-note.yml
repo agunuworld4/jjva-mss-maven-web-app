@@ -1,0 +1,96 @@
+# HELM INSTALLATION
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get-helm-3 > get_helm.sh
+chmod 700 get_helm.sh
+./get_helm.sh
+
+#################JENKINS#####################
+https://artifacthub.io/packages/helm/jenkinsci/jenkins
+
+#nginx ingress
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm install ingress-nginx ingress-nginx/ingress-nginx --dry-run
+helm install ingress-nginx ingress-nginx/ingress-nginx -n monitor
+
+#Create a namespace monitoring
+kubectl create namespace monitoring
+
+
+#installing prometheus using helm
+helm repo add prometheus https://prometheus-community.github.io/helm-charts
+helm search repo
+helm search repo prometheus  #search for specific repo called prometheus
+helm show values prometheus/prometheus
+helm upgrade --install prometheus prometheus/prometheus  -n monitoring
+#helm show values prometheus/prometheus > prometheus_may_16_22_values.yml
+#helm template prometheus stable/prometheus
+#helm install prometheus stable/prometheus  -n monitoring --dry-run
+#helm template prometheus stable/prometheus -n monitor --set replicas=4
+#helm upgrade prometheus stable/prometheus -n monitor --set replicas=4
+#helm rollback prometheus  -n monitor
+#helm uninstall prometheus  -n monitor
+helm upgrade --install prometheus prometheus/prometheus -f prom_alert_manager.yml -n monitoring
+helm ls -n montoring 
+kubectl get po,svc,sa,clusterrole,cm -n monitoring 
+kubectl top po
+kubectl get configmap -n monitoring
+kubectl get configmap prometheus-server -n monitoring -o yaml
+helm uninstall prometheus -n monitoring
+          #etra configuration on alert manager
+First edit file look like this
+ - name: http
+    port: 9093
+    protocol: TCP
+    targetPort: http
+
+#After editing
+ ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 9093
+
+
+##################HELM METRIC WITH MANIFESTS VALIDATION###############################
+#https://artifacthub.io/packages/helm/bitnami/metrics-server
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo ls
+helm search repo bitman
+helm template bitman/metrics-server #show manifest
+helm install releaseName bitman/metrics-server -n monitoring --dry-run #show manifest
+helm show value bitman/metrics-server #show manifest
+helm install myMetric bitman/metrics-server -n monitoring
+helm list -n monitoring
+kubectl get po,svc -n monitoring
+
+
+###################HELM GRAFANA INSTALLATION###############################
+#https://grafana.com/docs/agent/latest/operator/helm-getting-started/
+helm repo add grafana https://grafana.github.io/helm-charts
+helm search repo grafan 
+helm show values grafana/grafana
+helm upgrade --install grafana grafana/grafana -n monitoring
+#helm upgrade --install grafana grafana/grafana -f grafanaValues.yml -n monitoring #no changes in
+kubectl get po,svc -n monitoring
+helm uninstall grafana -n monitoring
+kubectl get configMaps --all-namespace
+#username is  admin 
+#use below link to get temporary pwd 
+kubectl get secret --namespace monitor grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+http://gra.eagunu4live.cloud/dashboards
+http://mongodb.eagunu4live.cloud/java-web-app/
+http://mongodb.eagunu4live.cloud/maven-web-app
+
+#Grafana Dasboard setup
+name: prometheus
+Prometheus server URL: http://prom.eagunu4live.cloud
+
+Node exporter
+11074
+1860
+15178
+6417
+
+9844
+
+kubernetes cluster monitoring: 315

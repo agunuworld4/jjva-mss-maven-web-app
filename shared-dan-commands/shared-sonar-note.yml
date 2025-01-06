@@ -1,0 +1,39 @@
+yum install java-17-openjdk-devel -y
+cd /opt
+yum install wget unzip -y
+
+#worked sunday jan 5 2025
+#wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.5.0.56709.zip
+#Never installed
+#wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-24.12.0.100206.zip
+#worked copy download file from 9.5
+#https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.8.100196.zip
+
+unzip sonarqube-9.5.0.56709.zip
+
+rm -rf sonarqube-9.5.0.56709.zip
+mv sonarqube-9.5.0.56709/ sonar-2025
+
+ls -lart sonar-9/
+useradd sonar-2025
+mv sonar-9/ sonar-2025
+
+visudo
+chown -R sonar-2025:sonar-2025 /opt/sonar-2025/
+chmod -R 775 /opt/sonar-2025/
+cd
+chown -R sonar-2025:sonar-2025 /opt/sonar-2025/
+chmod -R 775 /opt/sonar-2025/
+   29  cd /opt/
+   30  clear
+   31  ls -lart
+   32  historoy
+   33  history
+   34  chown -R sonar-2025:sonar-2025 /opt/sonar-2025/
+   35  chmod -R 775 /opt/sonar-2025/
+   36  clear
+   37  su - sonar-2025
+
+[sonar-2025@sonar-vm ~]$ history
+    1  /opt/sonar-2025/bin/linux-x86-64/sonar.sh start
+    2  /opt/sonar-2025/bin/linux-x86-64/sonar.sh status
