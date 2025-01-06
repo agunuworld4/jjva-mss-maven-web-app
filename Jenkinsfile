@@ -60,7 +60,7 @@ pipeline {
     // }
     //  }
 
-    stage ('SonarQubeReport') {
+    stage ('SonarQubeReports') {
       steps {
       //sh 'mvn clean package sonar:sonar'
       sh "mvn clean package sonar:sonar \
