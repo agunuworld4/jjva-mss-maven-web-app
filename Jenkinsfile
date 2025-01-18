@@ -32,7 +32,7 @@ pipeline {
     // This can be http or https
     NEXUS_PROTOCOL = "http"
     // Where your Nexus is running
-    NEXUS_URL = "35.231.74.53:8081"
+    NEXUS_URL = "35.226.17.212:8081"
     // Repository where we will upload the artifact
     NEXUS_REPOSITORY = "jjva-mss-maven-web-app"
     // Jenkins credential id to authenticate to Nexus OSS
@@ -62,12 +62,12 @@ pipeline {
 
     stage ('SonarQubeReports') {
       steps {
-      //sh 'mvn clean package sonar:sonar'
-      sh "mvn clean package sonar:sonar \
-           -Dsonar.projectKey=jjva-mss-maven-web-app \
-            -Dsonar.projectName='jjva-mss-maven-web-app' \
-             -Dsonar.host.url=http://34.23.173.91:9000 \
-              -Dsonar.token=sqp_2257be5ffbf99c7fc5985cc986a1409493eff437"
+      //sh 'mvn clean package sonar:sonar' jjva-mss-maven-web-app
+      sh "mvn clean verify sonar:sonar \
+          -Dsonar.projectKey=jjva-mss-maven-web-app \
+           -Dsonar.projectName='jjva-mss-maven-web-app' \
+            -Dsonar.host.url=http://34.138.102.99:9000 \
+             -Dsonar.token=sqp_db11ea5f16674caeb3bafc7ae4c9d760dd24d042"
          }
      }
 

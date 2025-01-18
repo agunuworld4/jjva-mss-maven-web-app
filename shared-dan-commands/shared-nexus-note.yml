@@ -1,0 +1,137 @@
+                #Nexus installation
+#############################
+#java 8
+yum update -y
+sudo yum install java-1.8.0-openjdk-devel
+#yum install java-11-openjdk-devel -y
+java --version
+update-alternatives --config java
+#################################
+cd /opt
+yum install tar wget -y
+##############################
+Nexus OSS
+Nexus Pro
+################
+Default: pwd
+userName: admin
+pwd: admin123
+##Login as a root user
+sudo su -
+
+##Change dir to /opt
+#java 8
+#As a good security practice, Nexus is not advised to run nexus service as a root user,
+# so create a new user called nexus and grant sudo access to manage nexus services as follows.
+#Give the sudo access to nexus user
+Login as a root user
+sudo su -
+cd /opt
+yum install wget tar  -y
+wget https://download.sonatype.com/nexus/3/nexus-3.36.0-01-unix.tar.gz
+
+https://download.sonatype.com/nexus/3/nexus-3.38.1-01-unix.tar.gz
+
+# wget https://download.sonatype.com/nexus/3/nexus-3.37.3-02-unix.tar.gz
+# wget https://download.sonatype.com/nexus/3/nexus-3.38.0-01-unix.tar.gz
+# wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+wget https://download.sonatype.com/nexus/3/nexus-3.44.0-01-unix.tar.gz
+tar -zxvf nexus-3.37.3-02-unix.tar.gz
+mv nexus-3.37.3-02 nexus
+#As a good security practice, Nexus is not advised to run nexus service as a root user, so create a new user called nexus and grant sudo access to manage nexus services as follows.
+useradd nexus-375
+#Give the sudo access to nexus user
+visudo
+nexus-375   ALL=(ALL)     NOPASSWD: ALL
+nexus ALL=(ALL) NOPASSWD: ALL
+#Change the owner and group permissions to /opt/nexus
+#and /opt/sonatype-work directories.
+chown -R nexus:nexus /opt/nexus
+chown -R nexus:nexus /opt/sonatype-work
+chmod -R 775 /opt/nexus
+chmod -R 775 /opt/sonatype-work
+#Open /opt/nexus/bin/nexus.rc file and  uncomment run_as_user parameter and set as nexus user.
+vi /opt/nexus/bin/nexus.rc
+run_as_user="nexus-375"
+#Create nexus as a service
+#From bin directories create soft link
+#/opt/nexus/bin
+ln -s /opt/nexus/bin/nexus /etc/init.d/nexus
+#Create a nexus systemd unit file.
+sudo vi /etc/systemd/system/nexus.service
+[Unit]
+Description=nexus service
+After=network.target
+
+[Service]
+Type=forking
+LimitNOFILE=65536
+User=nexus
+Group=nexus
+ExecStart=/opt/nexus-375/bin/nexus start
+ExecStop=/opt/nexus-375/bin/nexus stop
+User=nexus
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+#Switch as a nexus user and start the nexus service as follows.
+echo "run_as_user=\"nexus\"" >> /opt/nexus/nexus-2025/bin/nexus.rc
+sudo su - nexus
+#Enable the nexus services
+sudo systemctl enable nexus
+sudo systemctl start nexus
+sudo systemctl status nexus
+#####################
+https://devopscube.com/how-to-install-latest-sonatype-nexus-3-on-linux/
+https://help.sonatype.com/repomanager3/product-information/download
+###################
+#Access the Nexus server from Laptop/Desktop browser.
+http://IPAddess/Hostname:8081/
+#Default Credentials
+/opt/sonatype-work/nexus3/admin.password
+User Name: admin
+Password: nexus
+Troubleshooting
+---------------------
+nexus service is not starting?
+a)make sure need to change the ownership and group to /opt/nexus and /opt/sonatype-work directories and permissions (775) for nexus user.
+b)make sure you are trying to start nexus service with nexus user.
+c)check java is installed or not using java -version command.
+d) check the nexus.log file which is availabe in  /opt/sonatype-work/nexus3/log  directory.
+Unable to access nexus URL?
+-------------------------------------
+a)make sure port 8081 is opened in security groups in AWS ec2 instance.
+############################
+    1  cd /opt
+    2  yum install tar wget -y
+    3  clear
+    4  wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.rpm
+    5  yum install jdk-8u131-linux-x64.rpm -y
+    6  java -version
+    7  clear
+wget wget https://download.sonatype.com/nexus/3/nexus-3.38.0-01-unix.tar.gz
+    9  ls
+   10  clear
+   11  ls -lart
+   12  tar -zxvf nexus-3.38.0-01-unix.tar.gz
+   13  clear
+   14  ls
+   15  mv nexus-3.38.0-01 nexus
+   16  clear
+   17  ls -lart
+   18  useradd nexus
+   19  visudo
+   nexus ALL=(ALL)  NOPASSWD: ALL
+chown -R nexus:nexus /opt/nexus
+chown -R nexus:nexus /opt/sonatype-work
+chmod -R 775 /opt/nexus
+chmod -R 775 /opt/sonatype-work
+   24  vi /opt/nexus/bin/nexus.rc
+   25  ln -s /opt/nexus-3-38/bin/nexus /etc/init.d/nexus
+   26  sudo su - nexus-3-38
+   27  history
+[nexus@nexus-01 ~]$ history
+    1  sudo systemctl enable nexus
+    2  sudo systemctl start nexus
+    3  sudo systemctl status nexus

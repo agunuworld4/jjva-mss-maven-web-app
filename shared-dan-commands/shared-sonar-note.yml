@@ -1,6 +1,6 @@
 yum install java-17-openjdk-devel -y
 cd /opt
-yum install wget unzip -y
+sudo yum install wget unzip -y
 
 #worked sunday jan 5 2025
 #wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.5.0.56709.zip
@@ -19,11 +19,12 @@ useradd sonar-2025
 mv sonar-9/ sonar-2025
 
 visudo
-chown -R sonar-2025:sonar-2025 /opt/sonar-2025/
-chmod -R 775 /opt/sonar-2025/
+sonar-2025   ALL=(ALL)       NOPASSWD: ALL
+sudo chown -R sonar-2025:sonar-2025 /opt/sonar-2025/
+sudo chmod -R 775 /opt/sonar-2025/
 cd
-chown -R sonar-2025:sonar-2025 /opt/sonar-2025/
-chmod -R 775 /opt/sonar-2025/
+sudo chown -R sonar-2025:sonar-2025 /opt/sonar-2025/
+sudo chmod -R 775 /opt/sonar-2025/
    29  cd /opt/
    30  clear
    31  ls -lart
@@ -37,3 +38,14 @@ chmod -R 775 /opt/sonar-2025/
 [sonar-2025@sonar-vm ~]$ history
     1  /opt/sonar-2025/bin/linux-x86-64/sonar.sh start
     2  /opt/sonar-2025/bin/linux-x86-64/sonar.sh status
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+sudo yum upgrade
+# Add required dependencies for the jenkins package
+sudo yum install fontconfig java-17-openjdk
+sudo yum install jenkins
+sudo systemctl daemon-reload
+sudo systemctl enable jenkins
+sudo systemctl start jenkins

@@ -1,9 +1,9 @@
 #Jenkins nodes
-sudo mkdir java-working-directory
-sudo chmod -R 777 java-working-directory
-cd java-working-directory/
+sudo mkdir jjva-workingDirectory
+sudo chmod -R 777 jjva-workingDirectory
+cd jjva-workingDirectory/
 pwd
-/home/daman/java-working-directory
+
 ssh-keygen
 cat ~/.ssh/id_rsa.pub
 cat ~/.ssh/id_rsa

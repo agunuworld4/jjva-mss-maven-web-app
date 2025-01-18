@@ -985,6 +985,7 @@ kube_pod_container_status_terminated
 kube_pod_container_status_waiting
 
 
+
      ALERT HAS TO BE DEFINE AS PART OF PROMETHEUS FILES
 kubectl exec  prometheus_pods -n monitoring -c prometheus-server ls /etc/prometheus
 inject from outside
