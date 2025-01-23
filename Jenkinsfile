@@ -68,11 +68,6 @@ pipeline {
       steps {
       //sh 'mvn clean package sonar:sonar' jjva-mss-maven-web-app
       sh "mvn clean package sonar:sonar -Dsonar.projectKey=jjva-mss-maven-web-app -Dsonar.projectName='jjva-mss-maven-web-app' -Dsonar.host.url=http://${sonarIP}:9000 -Dsonar.token=${jjva_mvn_sonar_token}"
-      // sh "mvn clean package sonar:sonar \
-      //     -Dsonar.projectKey=jjva-mss-maven-web-app \
-      //      -Dsonar.projectName='jjva-mss-maven-web-app' \
-      //       -Dsonar.host.url=http://${sonarIP}:9000 \
-      //       -Dsonar.token=${jjva_mvn_sonar_token}"
          }
      }
 
