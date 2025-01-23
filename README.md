@@ -9,7 +9,17 @@
 # kubectl label nodes <nodeId/Name> node=workerone
 # kubectl taint nodes  <node> node=HatesPods:NoSchedule
 #kubectl taint nodes  <node> node=HatesPods:NoSchedule
-
+===========hardcoded sonar jjva_mvn_sonar_token
+<properties>
+  <jdk.version>1.8</jdk.version>
+  <spring.version>5.1.2.RELEASE</spring.version>
+  <junit.version>4.11</junit.version>
+  <log4j.version>1.2.17</log4j.version>
+  <sonar.host.url>http://35.231.106.174:9000/</sonar.host.url>
+  <sonar.login>squ_ab0d3af652245c394663a1d2c964ebc8f40263ec</sonar.login>
+  <sonar.organization>maven-web-app</sonar.organization>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 stage('QA approve') {
        steps {
          notifySlack("Do you approve QA deployment? $registry/job/$BUILD_NUMBER", notification_channel, [])
