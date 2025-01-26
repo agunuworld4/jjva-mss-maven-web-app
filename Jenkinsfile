@@ -1,5 +1,5 @@
 //${library.jenkins-slack-library.version}
-//@Library('Slack-us-east-jenkins-prod') _
+@Library('jjva-canada-channels') _
 
 pipeline {
 
@@ -19,8 +19,31 @@ pipeline {
   }
 
   environment {
+    //Apps environments properties
+    myApp="mss-java-app"
+    sonarName="jjva-mss-maven-web-app"
+    dockerName="jjva-mss-maven-web-app"
+    nexusName="jjva-mss-maven-web-app"
+    promeName="prometheus-server"
+    alertM="prometheus-alertmanager"
+    alertName="prometheus-alertmanager"
+    graName="grafana"
     BUILD_NUMBER = "${env.BUILD_ID}"
-    //jjva-mss-java-web-app sonarqubetoken
+    //website url properties
+    webSite="http://mdb.eagunu4live.com/maven-web-app"
+    sonarIP="http://35.229.80.79"
+    nexusIP="http://34.121.109.88"
+    promeLink="http://prome.eagunu4live.com"
+    grafanaURL="http://grafana.eagunu4live.com"
+    alertURL="http://alert.eagunu4live.com"
+    alartLink="http://alert.eagunu4live.com"
+    dockerlink="https://hub.docker.com/repository/docker/eagunuworld/jjva-mss-maven-web-app"
+    //Codes environment properties
+    GIT_COMMIT = "${GIT_COMMIT}"
+    GIT_BRANCH="${GIT_BRANCH}"
+    GIT_PREVIOUS_SUCCESSFUL_COMMIT   = "${GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
+    BUILD_NUMBER = "${env.BUILD_ID}"
+    //jjva-mss-maven-web-app sonarqubetoken
     jjva_mvn_sonar_token="sqp_843b7b9b05fb616c4f6cf1228c33ed6b5bd440f2"
     //Sonareqube externalIP Idress
     sonarIP="35.229.80.79"
@@ -187,28 +210,17 @@ pipeline {
   //     }
 
  }  //This line end the pipeline stages
-  ///post {   //This line start the post script uncommit later
-       // always { umcommit later
-          //junit 'target/surefire-reports/*.xml'
-         // jacoco execPattern: 'target/jacoco.exec'
-        // pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
-         //dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
-         //publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'owasp-zap-report', reportFiles: 'zap_report.html', reportName: 'OWASP ZAP HTML Report', reportTitles: 'OWASP ZAP HTML Report'])
-
-         //Use sendNotifications.groovy from shared library and provide current build result as parameter
-        // sendNotification currentBuild.result uncommit later
-        //} uncommmit lastr
-
-    //success {
-      //script {
-        /* Use slackNotifier.groovy from shared library and provide current build result as parameter */
-        //env.failedStage = "none"
-        //env.emoji = ":white_check_mark: :tada: :thumbsup_all:"
-        //sendNotification currentBuild.result
-      //}
-      //}
+   post {   //This line start the post script uncommit later
+     success {
+       script {
+        //* Use slackNotifier.groovy from shared library and provide current build result as parameter */
+        env.failedStage = "none"
+        env.emoji = ":white_check_mark: :tada: :thumbsup_all:"
+        sendNotification currentBuild.result
+      }
+      }
 
     // failure {
     //}
-  //}  //this line close post script stage uncommit lasster
+  }  //this line close post script stage
 }    //This line close the jenkins pipeline
