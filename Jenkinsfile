@@ -1,5 +1,5 @@
 //${library.jenkins-slack-library.version}
-@Library('jjva-canada-channels') _
+@Library('jvva-canada-channels-bot-user-slack-connections') _
 
 pipeline {
 
