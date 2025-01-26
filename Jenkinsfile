@@ -28,7 +28,6 @@ pipeline {
     alertM="prometheus-alertmanager"
     alertName="prometheus-alertmanager"
     graName="grafana"
-    BUILD_NUMBER = "${env.BUILD_ID}"
     //website url properties
     webSite="http://mdb.eagunu4live.com/maven-web-app"
     sonarIP="http://35.229.80.79"
@@ -46,7 +45,7 @@ pipeline {
     //jjva-mss-maven-web-app sonarqubetoken
     jjva_mvn_sonar_token="sqp_843b7b9b05fb616c4f6cf1228c33ed6b5bd440f2"
     //Sonareqube externalIP Idress
-    sonarIP="35.229.80.79"
+    sonar_ip_address="35.229.80.79"
     //eagunu docker registry repository
     registry = "eagunuworld/jjva-mss-maven-web-app"
     //eagunu dockerhub registry
@@ -90,7 +89,7 @@ pipeline {
     stage ('SonarQubeReports') {
       steps {
       //sh 'mvn clean package sonar:sonar' jjva-mss-maven-web-app
-      sh "mvn clean package sonar:sonar -Dsonar.projectKey=jjva-mss-maven-web-app -Dsonar.projectName='jjva-mss-maven-web-app' -Dsonar.host.url=http://${sonarIP}:9000 -Dsonar.token=${jjva_mvn_sonar_token}"
+      sh "mvn clean package sonar:sonar -Dsonar.projectKey=jjva-mss-maven-web-app -Dsonar.projectName='jjva-mss-maven-web-app' -Dsonar.host.url=http://${sonar_ip_address}:9000 -Dsonar.token=${jjva_mvn_sonar_token}"
          }
      }
 
