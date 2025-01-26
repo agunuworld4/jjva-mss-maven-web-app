@@ -23,7 +23,7 @@ pipeline {
     //jjva-mss-java-web-app sonarqubetoken
     jjva_mvn_sonar_token="sqp_843b7b9b05fb616c4f6cf1228c33ed6b5bd440f2"
     //Sonareqube externalIP Idress
-    sonarIP="34.75.8.35"
+    sonarIP="35.229.80.79"
     //eagunu docker registry repository
     registry = "eagunuworld/jjva-mss-maven-web-app"
     //eagunu dockerhub registry
@@ -36,7 +36,7 @@ pipeline {
     // This can be http or https
     NEXUS_PROTOCOL = "http"
     // Where your Nexus is running
-    NEXUS_URL = "34.29.3.243:8081"
+    NEXUS_URL = "34.121.109.88:8081"
     // Repository where we will upload the artifact
     NEXUS_REPOSITORY = "jjva-mss-maven-web-app"
     // Jenkins credential id to authenticate to Nexus OSS
